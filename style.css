@@ -23,7 +23,7 @@ img {
   --header-height: 4.5rem;
 
   /* colors */
-  --hue: 273;
+  --hue: 240;
   /* HSL color mode */
   --base-color: hsl(var(--hue) 36% 57%);
   --base-color-second: hsl(var(--hue) 65% 88%);
@@ -128,10 +128,10 @@ body {
 }
 
 #header.scroll .logo span {
-  color: white;
+  color: var(--body-color);
 }
 #header.scroll .icon-menu {
-  color: white;
+  color: var(--body-color);
 }
 
 main {
@@ -140,13 +140,16 @@ main {
 
 /* ====== LOGO ========================= */
 .logo {
-  font: 700 1.31rem 'Poppins', sans-serif;
+  font: 700 1.3125rem 'Poppins', sans-serif;
   color: var(--title-color);
 }
 .logo span {
   color: var(--base-color);
 }
 
+.logo-alt span {
+  color: var(--body-color);
+}
 /* ====== NAVIGATION ========================= */
 nav {
   height: var(--header-height);
@@ -452,4 +455,61 @@ nav.show div.icon-close {
   font-size: 1.5rem;
   margin-right: 0.625rem;
   color: var(--base-color);
+}
+
+/* ======= FOOTER ========================== */
+footer {
+  background: var(--base-color-alt);
+}
+
+footer .logo {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+footer .brand p {
+  color: var(--text-color-light);
+  margin-bottom: 0.75rem;
+}
+
+footer i {
+  font-size: 1.5rem;
+  color: var(--text-color-light);
+}
+
+footer .social a {
+  margin-right: 2rem;
+  transition: 0.2s;
+  display: inline-block;
+}
+
+footer .social a:hover {
+  transform: translateY(-8px);
+}
+
+/* ======= back-to-top ========================== */
+.back-to-top {
+  background: var(--base-color-alt);
+  color: var(--text-color-light);
+
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+
+  padding: 0.3rem;
+  clip-path: circle();
+  font-size: 1rem;
+  line-height: 0;
+
+  visibility: hidden;
+  opacity: 0;
+
+  transition: 0.3s;
+  transform: translateY(100%);
+}
+
+.back-to-top.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
 }
