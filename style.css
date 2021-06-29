@@ -23,7 +23,7 @@ img {
   --header-height: 4.5rem;
 
   /* colors */
-  --hue: 240;
+  --hue: 301;
   /* HSL color mode */
   --base-color: hsl(var(--hue) 36% 57%);
   --base-color-second: hsl(var(--hue) 65% 88%);
@@ -32,6 +32,12 @@ img {
   --text-color: hsl(0 0% 46%);
   --text-color-light: hsl(0 0% 98%);
   --body-color: hsl(0 0% 98%);
+  /* font */
+  --title-font-size: 1.875rem;
+  --subtitle-font-size: 1rem;
+
+  --title-font: 'Poppins', sans-serif;
+  --body-font: 'DM Sans', sans-serif;
 }
 
 /* ====== BASE ========================= */
@@ -39,14 +45,14 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  font: 400 1rem 'DM Sans', sans-serif;
+  font: 400 1rem var(--body-font);
   color: var(--text-color);
   background: var(--body-color);
   -webkit-font-smoothing: antialiased;
 }
 
 .title {
-  font: 700 1.875rem 'Poppins', sans-serif;
+  font: 700 var(--title-font-size) var(--title-font);
   color: var(--title-color);
   -webkit-font-smoothing: auto;
 }
@@ -59,7 +65,7 @@ body {
   align-items: center;
   padding: 0 2rem;
   border-radius: 0.25rem;
-  font: 500 1rem 'DM San', sans-serif;
+  font: 500 1rem var(--body-font);
   transition: background 0.3s;
 }
 
@@ -94,22 +100,28 @@ body {
   display: grid;
   gap: 2rem;
 }
+
 .section {
-  padding: 5rem 0;
+  padding: calc(5rem + var(--header-height)) 0;
 }
 .section .title {
   margin-bottom: 1rem;
 }
 
+.section .subtitle {
+  font-size: var(--subtitle-font-size);
+}
+
 .section header {
   margin-bottom: 4rem;
 }
+
 .section header strong {
   color: var(--base-color);
 }
 
 #header {
-  border-bottom: 1px solid #e4e4e4;
+  /* border-bottom: 1px solid #e4e4e4; */
   margin-bottom: 2rem;
   display: flex;
 
@@ -134,13 +146,9 @@ body {
   color: var(--body-color);
 }
 
-main {
-  margin-top: calc(var(--header-height) + 2rem);
-}
-
 /* ====== LOGO ========================= */
 .logo {
-  font: 700 1.3125rem 'Poppins', sans-serif;
+  font: 700 1.3125rem var(--title-font);
   color: var(--title-color);
 }
 .logo span {
@@ -159,17 +167,6 @@ nav {
   width: 100%;
 }
 
-nav .menu {
-  opacity: 0;
-  visibility: hidden;
-  top: -20rem;
-  transition: 0.2s;
-}
-
-nav .menu ul {
-  display: none;
-}
-
 nav ul li {
   text-align: center;
 }
@@ -179,7 +176,8 @@ nav ul li a {
   position: relative;
 }
 
-nav ul li a:hover {
+nav ul li a:hover,
+nav ul li a.active {
   color: var(--base-color);
 }
 
@@ -192,19 +190,27 @@ nav ul li a::after {
   position: absolute;
   left: 0;
   bottom: -1.5rem;
+
   transition: width 0.3s;
 }
 
-nav ul li a:hover::after {
+nav ul li a:hover::after,
+nav ul li a.active::after {
   width: 100%;
 }
 
-/* Mostrar o menu */
-
-nav.show .menu ul {
-  display: grid;
+nav .menu {
+  opacity: 0;
+  visibility: hidden;
+  top: -20rem;
+  transition: 0.2s;
 }
 
+nav .menu ul {
+  display: none;
+}
+
+/* Mostrar o menu */
 nav.show .menu {
   opacity: 1;
   visibility: visible;
@@ -221,9 +227,14 @@ nav.show .menu {
   place-content: center;
 }
 
+nav.show .menu ul {
+  display: grid;
+}
+
 nav.show ul.grid {
   gap: 4rem;
 }
+
 /* toggle menu*/
 .toggle {
   color: var(--base-color);
@@ -356,7 +367,7 @@ nav.show div.icon-close {
   color: var(--base-color);
 }
 
-.card.title {
+.card .title {
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
 }
@@ -462,6 +473,10 @@ footer {
   background: var(--base-color-alt);
 }
 
+footer.section {
+  padding: 4rem 0;
+}
+
 footer .logo {
   display: inline-block;
   margin-bottom: 1.5rem;
@@ -477,8 +492,12 @@ footer i {
   color: var(--text-color-light);
 }
 
+footer .social {
+  grid-auto-flow: column;
+  width: fit-content;
+}
+
 footer .social a {
-  margin-right: 2rem;
   transition: 0.2s;
   display: inline-block;
 }
@@ -512,4 +531,153 @@ footer .social a:hover {
   visibility: visible;
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ======= MEDIA QUERIES========================== */
+/* extra large devices: 1200 > */
+@media (min-width: 1200px) {
+  /* REUSABLE CLASSES 1200px */
+  .container {
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section {
+    padding: 10rem 0;
+  }
+
+  .section header,
+  #testimonials header {
+    max-width: 32rem;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .button {
+    height: 3.125rem;
+  }
+
+  /* NAVIGATION 1200px */
+  nav .menu {
+    visibility: visible;
+    opacity: 1;
+    top: 0;
+  }
+
+  nav .menu ul {
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav .menu ul li a.title {
+    font: 400 1rem var(--body-font);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav .menu ul li a.title.active {
+    font-weight: bold;
+    -webkit-font-smoothing: auto;
+  }
+
+  nav .icon-menu {
+    display: none;
+  }
+
+  /* LAYOUT 1200px */
+  main {
+    margin-top: var(--header-height);
+  }
+
+  /* HEADER 1200px */
+  #header {
+    border-bottom: 1px solid #e4e4e4;
+  }
+
+  #header.scroll {
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+    background-color: var(--body-color);
+  }
+
+  #header.scroll .logo span {
+    color: var(--base-color);
+  }
+
+  #header.scroll .icon-menu {
+    color: var(--base-color);
+  }
+
+  /* HOME 1200px */
+
+  #home .container {
+    grid-auto-flow: column;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+
+  #home .image {
+    order: 1;
+  }
+
+  #home .text {
+    order: 0;
+    max-width: 24rem;
+    text-align: left;
+  }
+
+  /* ABOUT 1200px */
+  #about .container {
+    margin: 0 auto;
+    grid-auto-flow: column;
+  }
+
+  /* SERVICES 1200px */
+  .cards {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .card {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  /* TESTIMONIALS 1200px */
+  #testimonials .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* CONTACT 1200px */
+  #contact .container {
+    grid-auto-flow: column;
+    align-items: center;
+  }
+
+  #contact .text {
+    max-width: 25rem;
+  }
+
+  /* FOOTER 1200px */
+  footer .section {
+    padding: 3.75rem;
+  }
+
+  footer .container {
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  footer .logo {
+    font-size: 2.25rem;
+  }
+}
+
+/* large devices: 992 > */
+@media (min-width: 992px) {
+  :root {
+    --title-font-size: 2.25rem;
+    --subtitle-font-size: 1.125rem;
+  }
 }
